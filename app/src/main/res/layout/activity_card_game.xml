@@ -8,10 +8,13 @@
     tools:context=".CardGameActivity">
 
   <ImageView
-      android:id="@+id/ImageView"
-      android:layout_width="191dp"
-      android:layout_height="332dp"
-      app:srcCompat="@drawable/club_ace"
-      tools:layout_editor_absoluteX="110dp"
-      tools:layout_editor_absoluteY="49dp" />
+      android:id="@+id/cardImage"
+      android:layout_width="122dp"
+      android:layout_height="144dp"
+      android:layout_marginBottom="250dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/club_ace" />
 </androidx.constraintlayout.widget.ConstraintLayout>
