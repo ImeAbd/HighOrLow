@@ -9,19 +9,30 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
-    late init var introtextView = TextView
+    lateinit var welcomeTextView: TextView
+    lateinit var welcomeImageView: ImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val button = findViewById<Button>(R.id.startButton)
-        val buttonClick = findViewById<Button>(R.id.startButton)
-        buttonClick.setOnClickListener {
+        welcomeTextView = findViewById(R.id.welcomeText)
+        welcomeImageView = findViewById((R.id.welcomeImage))
+
+
+       val button = findViewById<Button>(R.id.startButton)
+        button.setOnClickListener{
+
+            handleButtonPress()
+        }
+
+
+        }
+        fun handleButtonPress() {
             val intent = Intent(this, CardGameActivity::class.java)
+
             startActivity(intent)
 
         }
     }
-}
