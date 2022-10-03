@@ -1,5 +1,6 @@
 package com.example.highorlow
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -16,15 +17,16 @@ class CardGameActivity : AppCompatActivity() {
     lateinit var scoreTextView: TextView
     private val deck = mutableListOf<Card>()
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card_game)
         scoreCount = 0
-        this.scoreView = findViewById<View>(R.id.scoreTextView) as TextView
-        scoreView!!.text = "Score: $scoreCount"
+        this.scoreTextView = findViewById<View>(R.id.scoreTextView) as TextView
+        scoreTextView.text = "Score: $scoreCount"
 
-        val lowerButton: Button = findViewById<Button>(R.id.lowerButton)
-        val higherButton: Button = findViewById<Button>(R.id.higherButton)
+        val lowerButton: Button = findViewById(R.id.lowerButton)
+        val higherButton: Button = findViewById(R.id.higherButton)
 
 
         cardImage = findViewById(R.id.cardImage)
@@ -47,18 +49,23 @@ class CardGameActivity : AppCompatActivity() {
         val card = deck[random]
         cardImage.setImageResource(card.image)
             when (random){
-                R.id.higherButton -> if (card.value > random){
-            }
-                else if (card.value < random) {
-            }
-                R.id.lowerButton -> if (card.value < random){
+                R.id.higherButton -> if (card.value > deck.size) card.value else deck.size
+
                 }
-                else if (card.value > random) {
+                if (card.value < deck.size) deck.size else (card.value); run {
+                    Log.d("!!!", card.suite)
 
+            upScore()
+         }
+            when (random){
+                R.id.lowerButton -> if (card.value < deck.size) card.value else deck.size
+            }
 
-                    upScore()
+                if (card.value > deck.size) deck.size else (card.value); run {
+                    Log.d("!!!", card.suite)
+
+            upScore()
                 }
-
 
 
 //    private fun getRandomCard() {
@@ -80,13 +87,12 @@ class CardGameActivity : AppCompatActivity() {
 ////                upScore()
 
 
-
-    } // Funktion för att slumpa kort
+//         Function för att slump kort
 
 
     fun createDeck() {
 
-        val card = Card(image = R.drawable.club_ace, 1, "clubs")
+        val card0 = Card(image = R.drawable.club_ace, 1, "clubs")
         val card1 = Card(image = R.drawable.club_two, 2, "clubs")
         val card2 = Card(image = R.drawable.club_three, 3, "clubs")
         val card3 = Card(image = R.drawable.club_four, 4, "clubs")
@@ -101,7 +107,7 @@ class CardGameActivity : AppCompatActivity() {
         val card12 = Card(image = R.drawable.club_four, 10, "clubs")
 
 
-        deck.add(card)
+        deck.add(card0)
         deck.add(card1)
         deck.add(card2)
         deck.add(card3)
@@ -121,11 +127,16 @@ class CardGameActivity : AppCompatActivity() {
 
     }
         }
+
+
+    @SuppressLint("SetTextI18n")
     fun upScore() {
         scoreCount++
         scoreView!!.text = "Score: $scoreCount"
         }
 }
+
+
 
 
 
