@@ -4,93 +4,85 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import kotlin.random.Random
 
 class CardGameActivity : AppCompatActivity() {
-    var scoreCount = 0
-    var scoreView: TextView? = null
+    private var scoreCount = 0
     private lateinit var cardImage: ImageView
-    lateinit var scoreTextView: TextView
+    private lateinit var scoreTextView: TextView
     private val deck = mutableListOf<Card>()
+    private var lastCard: Card? = null
+
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card_game)
         scoreCount = 0
-        this.scoreTextView = findViewById<View>(R.id.scoreTextView) as TextView
-        scoreTextView.text = "Score: $scoreCount"
+        scoreTextView = findViewById(R.id.scoreTextView)
+        scoreTextView.text = "Current score: $scoreCount"
 
         val lowerButton: Button = findViewById(R.id.lowerButton)
         val higherButton: Button = findViewById(R.id.higherButton)
-
-
         cardImage = findViewById(R.id.cardImage)
 
+        createDeck()
 
-        findViewById<Button>(R.id.higherButton)
+        Log.d("!!!", "start")
+
         higherButton.setOnClickListener {
-            getRandomCard()
+            getHighRandomCard()
+        }
 
-            findViewById<Button>(R.id.lowerButton)
-            lowerButton.setOnClickListener {
-                getRandomCard()
-            }
+
+        lowerButton.setOnClickListener {
+            getLowRandomCard()
+
         }
     }
 
 
-    private fun getRandomCard() {
+
+
+    private fun getHighRandomCard() {
         val random = Random.nextInt(deck.size)
-        val card = deck[random]
-        cardImage.setImageResource(card.image)
-            when (random){
-                R.id.higherButton -> if (card.value > deck.size) card.value else deck.size
+        val newCard = deck[random]
+        cardImage.setImageResource(newCard.image)
 
-                }
-                if (card.value < deck.size) deck.size else (card.value); run {
-                    Log.d("!!!", card.suite)
+        if (lastCard != null) {
 
-            upScore()
-         }
-            when (random){
-                R.id.lowerButton -> if (card.value < deck.size) card.value else deck.size
+
+            Log.d("!!!", "new: ${newCard.value} old: ${lastCard?.value}")
+
+            if (newCard.value > lastCard!!.value) {
+                upScore()
             }
+        }
+        lastCard = newCard
+    }
 
-                if (card.value > deck.size) deck.size else (card.value); run {
-                    Log.d("!!!", card.suite)
+    private fun getLowRandomCard() {
+        val random = Random.nextInt(deck.size)
+        val newCard = deck[random]
+        cardImage.setImageResource(newCard.image)
 
-            upScore()
-                }
-
-
-//    private fun getRandomCard() {
-//        val random = Random.nextInt(deck.size)
-//        val card = deck[random]
-//        cardImage.setImageResource(card.image)
-//        // val index = Random.nextInt(deck.size)
-//        // val cpuChoice = deck[index]
-//        // var message = ""
-////         val id = view.id
-//        when (random) {
-//            R.id.higherButton -> if (card.value < random) {
-//                //Right Choice
-////                message = "You were right! It was a higher card!"
-//            } else if (card.value < random) {
-//                //Wrong Choice
-////                message = "You were wrong! It was a lower card!"
-////
-////                upScore()
+        if (lastCard != null) {
 
 
-//         Function för att slump kort
+            Log.d("!!!", "new: ${newCard.value} old: ${lastCard?.value}")
+
+            if (newCard.value < lastCard!!.value) {
+                upScore()
+            }
+        }
+        lastCard = newCard
+    }
 
 
-    fun createDeck() {
+    private fun createDeck() {
 
         val card0 = Card(image = R.drawable.club_ace, 1, "clubs")
         val card1 = Card(image = R.drawable.club_two, 2, "clubs")
@@ -124,17 +116,23 @@ class CardGameActivity : AppCompatActivity() {
         deck.shuffle()
 
 
-
     }
-        }
 
-
-    @SuppressLint("SetTextI18n")
-    fun upScore() {
+    private fun upScore() {
+        Log.d("!!!", "score $scoreCount")
         scoreCount++
-        scoreView!!.text = "Score: $scoreCount"
-        }
+        scoreTextView.text = "Current score: $scoreCount"
+    }
 }
+
+
+
+
+
+
+
+
+
 
 
 
