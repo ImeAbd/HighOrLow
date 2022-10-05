@@ -4,8 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.204" />
-        <entry key="app/src/main/res/layout/activity_card_game.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_card_game.xml" value="0.18479156494140625" />
+        <entry key="app/src/main/res/layout/activity_game_over.xml" value="0.21401628134907158" />
+        <entry key="app/src/main/res/layout/activity_losing.xml" value="0.10371376811594203" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23327280680338536" />
+        <entry key="app/src/main/res/layout/activity_winning.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.26132246376811596" />
       </map>
     </option>

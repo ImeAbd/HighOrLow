@@ -21,18 +21,19 @@ class MainActivity : AppCompatActivity() {
         welcomeImageView = findViewById((R.id.welcomeImage))
 
 
-       val button = findViewById<Button>(R.id.startButton)
-        button.setOnClickListener{
+        val button = findViewById<Button>(R.id.startButton)
+        button.setOnClickListener {
 
             handleButtonPress()
         }
 
 
-        }
-        fun handleButtonPress() {
-            val intent = Intent(this, CardGameActivity::class.java)
-
-            startActivity(intent)
-
-        }
     }
+
+    fun handleButtonPress() {
+        val intent = Intent(this, CardGameActivity::class.java)
+
+        startActivity(intent)
+
+    }
+}

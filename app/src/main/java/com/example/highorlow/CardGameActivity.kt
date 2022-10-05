@@ -1,16 +1,18 @@
 package com.example.highorlow
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import kotlin.random.Random
 
 class CardGameActivity : AppCompatActivity() {
-    private var scoreCount = 0
+    private var scoreCount = 5
     private lateinit var cardImage: ImageView
     private lateinit var scoreTextView: TextView
     private val deck = mutableListOf<Card>()
@@ -21,7 +23,7 @@ class CardGameActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card_game)
-        scoreCount = 0
+        scoreCount = 5
         scoreTextView = findViewById(R.id.scoreTextView)
         scoreTextView.text = "Current score: $scoreCount"
 
@@ -45,8 +47,6 @@ class CardGameActivity : AppCompatActivity() {
     }
 
 
-
-
     private fun getHighRandomCard() {
         val random = Random.nextInt(deck.size)
         val newCard = deck[random]
@@ -59,6 +59,15 @@ class CardGameActivity : AppCompatActivity() {
 
             if (newCard.value > lastCard!!.value) {
                 upScore()
+            }
+            if (newCard.value < lastCard!!.value) {
+                Toast.makeText(
+                    this,
+                    "Your guess was wrong. ${newCard.value} of ${newCard.suite} is a lower card.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                downScore()
+
             }
         }
         lastCard = newCard
@@ -77,7 +86,16 @@ class CardGameActivity : AppCompatActivity() {
             if (newCard.value < lastCard!!.value) {
                 upScore()
             }
+            if (newCard.value > lastCard!!.value) {
+                Toast.makeText(
+                    this,
+                    "Your guess was wrong. ${newCard.value} of ${newCard.suite} is a higher card.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                downScore()
+            }
         }
+
         lastCard = newCard
     }
 
@@ -122,6 +140,20 @@ class CardGameActivity : AppCompatActivity() {
         Log.d("!!!", "score $scoreCount")
         scoreCount++
         scoreTextView.text = "Current score: $scoreCount"
+
+        if (scoreCount == 10) {
+            val intent = Intent(this, WinningActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun downScore() {
+        scoreCount--
+        scoreTextView.text = "Current score: $scoreCount"
+        if (scoreCount == 0) {
+            val intent = Intent(this, LosingActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
 
