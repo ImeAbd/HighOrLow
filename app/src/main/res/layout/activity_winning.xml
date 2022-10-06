@@ -11,6 +11,7 @@
         android:id="@+id/winningTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#FF9800"
         android:text="You made it!"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"

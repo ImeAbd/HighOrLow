@@ -11,7 +11,9 @@
         android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:soundEffectsEnabled="false"
         android:text="High or Low?"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,12 +24,12 @@
         android:id="@+id/startButton"
         android:layout_width="187dp"
         android:layout_height="99dp"
-        android:text="Starta"
+        android:text="Start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.843" />
+        app:layout_constraintVertical_bias="0.862" />
 
     <ImageView
         android:id="@+id/welcomeImage"
@@ -38,6 +40,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.391"
         app:srcCompat="@drawable/card" />
+
+    <TextView
+        android:id="@+id/rulesTextView"
+        android:layout_width="359dp"
+        android:layout_height="167dp"
+        android:background="#FFF1F1"
+        android:text="Rules:  \nGuess if the next card is higher or lower than the card shown.  \nYou start with 2 points.  \nYou lose a point for every wrong choice.  \nIf you hit 0 points, you lose.  \nIf you hit 10 points, you win.  \nTry your luck! "
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.583" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

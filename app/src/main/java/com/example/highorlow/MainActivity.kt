@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var welcomeTextView: TextView
     lateinit var welcomeImageView: ImageView
+    lateinit var rulesTextView: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         welcomeTextView = findViewById(R.id.welcomeText)
         welcomeImageView = findViewById((R.id.welcomeImage))
+        rulesTextView = findViewById(R.id.rulesTextView)
 
 
         val button = findViewById<Button>(R.id.startButton)
